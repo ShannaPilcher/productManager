@@ -10,10 +10,21 @@ const ProductList = (props) => {
                 setProducts(res.data);
             })
     }, [])
+    const removeFromDom = productId => {
+        setProducts(products.filter(product => product._id != productId))
+    }
+    const deleteProduct = productId => {
+        axios.delete('http://localhost:8000/api/products/' + productId)
+            .then(res => {removeFromDom(productId)})
+    }
     return (
         <div>
             {products.map((product, idx) => {
-                return <Link to= {`/products/${product._id}`} > <p key={idx}>{product.title}</p> </Link>
+                return <p key = {idx}>
+                <Link to= {`/products/${product._id}`} > {product.title} </Link>
+                <Link to= {`/products/${product._id}/edit`}><button>Edit</button></Link>
+                <button onClick={(e)=> {deleteProduct(product._id)}} >Delete</button>
+                </p> 
             })}
         </div>
     )

@@ -4,7 +4,7 @@ import Router from '@reach/router'
 import ProductForm from '../components/ProductForm';
 import ProductList from '../components/ProductList'
 
-const Main = (props) => {
+const Main = () => {
     return(
         <div>
             <ProductForm />
